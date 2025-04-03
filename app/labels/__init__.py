@@ -1,0 +1,1 @@
+from app.labels.versionLabel import VersionLabel

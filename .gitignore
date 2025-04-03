@@ -1,0 +1,43 @@
+# 📌 Ignore le Virtual Environment
+venv/
+.env
+.venv/
+
+# 📌 Ignore les fichiers Python compilés
+*.pyc
+*.pyo
+__pycache__/
+
+# 📌 Ignore les fichiers de logs et caches
+*.log
+*.bak
+*.swp
+*.swo
+*.DS_Store
+*.egg-info/
+.pytest_cache/
+
+# 📌 Ignore les fichiers de Buildozer (Android/iOS)
+buildozer.spec
+.buildozer/
+dist/
+bin/
+gen/
+
+# 📌 Ignore compile files
+## For android (gradle)
+.gradle/
+local.properties
+*.iml
+.idea/
+*.apk
+*.aab
+
+# 📌 Ignore Vscode config folder
+.vscode/
+
+# Folder used to store examples see online.
+demo/
+
+# Ignore custom sessions files
+app/fonts/font.py

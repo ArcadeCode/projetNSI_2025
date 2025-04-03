@@ -1,0 +1,2 @@
+from app.widgets.titleScreen import TitleScreenWidget
+from app.widgets.homeScreenWidget import HomeScreenWidget
