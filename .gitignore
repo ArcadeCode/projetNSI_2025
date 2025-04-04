@@ -34,7 +34,7 @@ local.properties
 *.aab
 
 # 📌 Ignore Vscode config folder
-.vscode/
+.vscode
 
 # Folder used to store examples see online.
 demo/
