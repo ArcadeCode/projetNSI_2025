@@ -9,7 +9,7 @@ set CLEAN_LOGS=1
 for %%A in (%*) do (
     if "%%A"=="--no-sync" set SYNC=0
     if "%%A"=="--no-font-refresh" set FONT_REFRESH=0
-    if "%%A"=="--no-font-log-clean" set CLEAN_LOGS=0
+    if "%%A"=="--no-log-clean" set CLEAN_LOGS=0
 )
 
 :: Exécution des commandes en fonction des options
