@@ -43,6 +43,7 @@ RUN yes | buildozer init . \
  && sed -i 's/title.*/title = Sportify app/' buildozer.spec \
  && sed -i 's/package.name.*/package.name = org.sportify/' buildozer.spec \
  && sed -i 's/package.name.*/package.domain = org.sportify/' buildozer.spec \
+ && sed -i 's/android.permissions*/android.permissions = INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION/' buildozer.spec \
  && yes | buildozer android debug
 
 # We go back in buildozer because "/buildozer/app/" doesn't need to be persistent

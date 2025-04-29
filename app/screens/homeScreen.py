@@ -6,6 +6,8 @@ from kivy.clock import Clock
 from kivy.properties import StringProperty, ListProperty
 from kivy.logger import Logger
 
+from app.screens.historicScreen import RunHistoryScreen
+
 import datetime
 import json
 import os
@@ -269,9 +271,12 @@ class RunTrackerWidget(BoxLayout):
             minutes, seconds = divmod(remainder, 60)
             self.duration = f'{hours:02d}:{minutes:02d}:{seconds:02d}'
             self.time_label.text = f'Durée: {self.duration}'
-    
+
+    # Modification de la méthode show_history dans RunTrackerWidget
     def show_history(self, instance):
-        # Cette fonction pourrait ouvrir un nouvel écran avec l'historique
+        """Affiche l'écran d'historique des courses"""
+
+        # Version CLI
         runs = self.history_manager.get_all_runs()
         if runs:
             print("=== Historique des courses ===")
@@ -280,6 +285,20 @@ class RunTrackerWidget(BoxLayout):
                 print(f"{run['name']}{mock_indicator} - {run['distance_meters']:.1f}m - {run['duration_seconds']}s")
         else:
             print("Aucune course enregistrée")
+
+        # Vérifier si l'écran d'historique existe déjà
+        if not self.parent.parent.parent.has_screen('history'):
+            # Créer l'écran d'historique
+            history_screen = RunHistoryScreen(self.history_manager, name='history')
+            self.parent.parent.parent.add_widget(history_screen)
+        else:
+            # Recharger l'historique si l'écran existe déjà
+            history_screen = self.parent.parent.parent.get_screen('history')
+            history_screen.load_history()
+        
+        # Passer à l'écran d'historique
+        self.parent.parent.parent.transition.direction = 'left'
+        self.parent.parent.parent.current = 'history'
 
 # Mise à jour de votre HomeScreenWidget pour y intégrer le système de tracking GPS
 class HomeScreenWidget(BoxLayout):
