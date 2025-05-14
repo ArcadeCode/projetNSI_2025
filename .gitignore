@@ -36,8 +36,9 @@ local.properties
 # 📌 Ignore Vscode config folder
 .vscode
 
-# Folder used to store examples see online.
+# Folder used to store examples and temporary elements for the project.
 demo/
+runs/
 
 # Ignore custom sessions files
 app/fonts/font.py

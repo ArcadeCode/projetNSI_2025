@@ -1,49 +1,70 @@
+from kivy.uix.widget import Widget
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.logger import Logger
 from app.fonts import Font
 from app import APP_VERSION
 
-from kivy.logger import Logger
-from kivy.uix.button import Button
-from kivy.uix.label import Label
-from kivy.uix.widget import Widget
-
-from kivy.clock import Clock
-
-
-class TitleScreenWidget(Widget):
+# TODO: Fix spaghettis layout thing.
+class TitleScreenWidget(BoxLayout):
     def __init__(self, **kwargs):
-        # make sure we aren't overriding any important functionality
         super(TitleScreenWidget, self).__init__(**kwargs)
-
-        self.orientation = "vertical"
-        self.spacing = 0
-
-        # Assembly widget :
-        self.add_widget(
-            Label(text="Sportify",
-                  font_size=24,
-                  font_name=Font.Montserrat_Bold,
-                  halign='center',
+        
+        # Puisque nous sommes dans un Screen, nous pouvons utiliser 
+        # un FloatLayout pour occuper tout l'espace disponible
+        layout_principal = FloatLayout(size_hint=(1, 1))
+        
+        # Créer un BoxLayout pour organiser verticalement nos éléments
+        content_layout = BoxLayout(
+            orientation='vertical',
+            size_hint=(0.7, 0.4),  # Taille du contenu par rapport à l'écran
+            pos_hint={'center_x': 0.5, 'center_y': 0.5},  # Position centrée sur l'écran
+            spacing=20  # Espacement entre les widgets
+        )
+        
+        # Ajouter les widgets au content_layout
+        content_layout.add_widget(
+            Label(
+                text="Sportify",
+                font_size=24,
+                font_name=Font.Montserrat_Bold,
+                size_hint_y=None,
+                height=50,
+                halign='center'
             )
         )
-        self.add_widget(
-            Label(text=f"version : {APP_VERSION}",
-                  font_size=12,
-                  font_name=Font.Montserrat_Bold
+        
+        content_layout.add_widget(
+            Label(
+                text=f"version : {APP_VERSION}",
+                font_size=12,
+                font_name=Font.Montserrat_Bold,
+                size_hint_y=None,
+                height=30,
+                halign='center'
             )
         )
-        self.add_widget(
-            Widget(
-                size_hint=(None, None),
-                size=(200, 100))
-        )
-
+        
+        # Ajouter un spacer (espace vide) pour pousser le bouton vers le bas
+        content_layout.add_widget(Widget(size_hint_y=0.2))
+        
+        # Créer et ajouter le bouton
         self.btn = Button(
-                text="Sign in",
-                size_hint=(.5, .25),
-                pos_hint={'center_x': .5, 'center_y': .5}
-            )
+            text="Sign in",
+            size_hint=(0.8, None),
+            height=50,
+            pos_hint={'center_x': 0.5}  # Centre le bouton horizontalement dans le BoxLayout
+        )
         self.btn.bind(on_press=self.on_sign_in_press)
-        self.add_widget(self.btn)  # Ajout du bouton au widget
+        content_layout.add_widget(self.btn)
+        
+        # Ajouter le layout de contenu au layout principal
+        layout_principal.add_widget(content_layout)
+        
+        # Ajouter le layout principal au widget
+        self.add_widget(layout_principal)
         
         Logger.debug(f"{self} was initialized")
     
@@ -55,7 +76,7 @@ class TitleScreenWidget(Widget):
             Logger.debug("Switching to home screen")
         else:
             Logger.error("Cannot find parent screen")
-    
+   
     def get_parent_screen(self):
         # Remonter la hiérarchie des widgets pour trouver le Screen parent
         parent = self.parent

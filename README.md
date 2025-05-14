@@ -21,31 +21,6 @@ L'interface graphique est basé sur le framework kivy, voici présentement les d
 Ci-joint la liste des objets surcharger :
 - `LabelVersion` = Une version de Label qui récupère la version du projet ( présente dans `.version` ) et l'affiche.
 
-```
-SportifyApp (App)
-=> TitleScreen (Screen)
-    => TitleLabel (Label)
-    => ConnectButton (Button) # Switch screen to HomeScreen
-    => VersionLabel (LabelVersion) hérite de (Label)
-
---- Cannot go back to the title ---
-
-=> HomeScreen (Screen)
-    => DayResultWidget (Widget) # Affichage des résultats journaliers
-    => MonthResultWidget (Widget) # Affichage des résultats mensuels
-=> HistoricScreen (Screen)
-    => TodayResultWidget (Widget)
-    => BeforeResultWidget (Widget)
-=> AboutScreen (Screen)
-    => AboutWidget (Widget) # A propos de l'application
-        => AboutLabel (Label)
-        => VersionLabel (LabelVersion) hérite de (Label)
-=> ConnectToDatabaseScreen (Screen)
-    => AutorizeTrackingButton (Button) # Demande l'accès aux sensors et lance une tentative de connection à la db
-    => DatabaseIsOkayWidget (Widget) # Renvoie si oui ou non la DB est opérationnel
-    => SensorManagerWidget (Widget) # Renvoie des informations de débogage sur les capteurs
-```
-
 ## Décomposition de la structure du projet
 ```
 projet-nsi-2025

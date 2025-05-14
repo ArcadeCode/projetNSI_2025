@@ -18,7 +18,7 @@ if %FONT_REFRESH%==1 python -m uv run python ./scripts/refresh_font.py
 if %CLEAN_LOGS%==1 python -m uv run python ./scripts/clear_logs.py
 
 @echo Starting the app, this can take some time...
-python -m uv run python -m app.main screen:phone_samsung_galaxy_s5
+python -m uv run python -m app.main
 
 
 ::python -m uv sync
