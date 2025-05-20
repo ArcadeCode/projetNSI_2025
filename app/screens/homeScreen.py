@@ -37,7 +37,7 @@ class GPSTracker:
         self.coordinates = []
         self.start_time = datetime.datetime.now()
         
-        # En mode simulation, ajoutons quelques points fictifs pour les tests sur PC
+        # En mode simulation, ajoutons un mock du tracker gps
         if self.mock_mode:
             # Planifie l'ajout de points GPS simulés
             Clock.schedule_interval(self.add_mock_point, 2)
@@ -60,7 +60,7 @@ class GPSTracker:
             })
     
     def add_mock_point(self, dt):
-        """Ajoute un point GPS simulé pour les tests sur PC"""
+        """Ajoute un point GPS simulé"""
         if not self.running:
             return False
             
