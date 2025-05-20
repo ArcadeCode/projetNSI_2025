@@ -39,6 +39,7 @@ local.properties
 # Folder used to store examples and temporary elements for the project.
 demo/
 runs/
+.db
 
 # Ignore custom sessions files
 app/fonts/font.py

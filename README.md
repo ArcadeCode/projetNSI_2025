@@ -25,7 +25,6 @@ Ci-joint la liste des objets surcharger :
 ```
 projet-nsi-2025
 └───app
-│   ├───core ---------> Contain core concepts literally everything except graphic elements.
 │   ├───fonts --------> Contain all fonts and font manager.
 │   ├───labels -------> Contain labels and label tools
 │   ├───tests --------> Contain tests for testing the app.
@@ -41,6 +40,4 @@ projet-nsi-2025
 │
 ├───uv.lock ----------> Lock file for UV manager.
 └───.gitignore -------> Ignore file for gitignore.
-
-
 ```
