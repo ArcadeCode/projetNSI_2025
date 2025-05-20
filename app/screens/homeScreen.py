@@ -130,6 +130,18 @@ class GPSTracker:
             json.dump(run_data, f, indent=2)
 
         # TODO: Implémenter la sauvegarde network via une DB sur internet
+        from app.database import database as db
+        db.create_tables()
+        db.ajouter_utilisateur("Doe", "John", "johnDoe@example.com", "password")
+        db.ajouter_activite(
+            id_utilisateur=0,
+            type_activite="course",
+            date_activite=run_data['start_time'],
+            duree=run_data['duration_seconds'],
+            distance=run_data['distance_meters'],
+            calories=0,
+            bpm_moyen=0
+        )
             
         return file_path
 

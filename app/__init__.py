@@ -6,6 +6,6 @@ APP_VERSION = content
 
 
 import app.fonts
-import app.core
 import app.labels
 import app.widgets
+import app.database
