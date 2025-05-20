@@ -13,6 +13,8 @@ import json
 import os
 import platform
 
+# TODO: Ré-organiser un peu ce fichier
+
 # Vérification de la disponibilité du GPS
 GPS_AVAILABLE = True
 try:
@@ -82,16 +84,14 @@ class GPSTracker:
         return True
             
     def get_distance(self):
-        # Une implémentation simple de la distance totale parcourue
-        # À remplacer par une formule plus précise (Haversine par exemple)
+        """Une implémentation simple de la distance totale parcourue"""
         total_distance = 0
         for i in range(1, len(self.coordinates)):
             # Distance euclidienne simplifiée (à améliorer pour une vraie application)
             lat1, lon1 = self.coordinates[i-1]['latitude'], self.coordinates[i-1]['longitude']
             lat2, lon2 = self.coordinates[i]['latitude'], self.coordinates[i]['longitude']
             
-            # Approximation très simplifiée (à remplacer par formule Haversine)
-            # Ici, on multiplie par un facteur pour convertir approximativement en mètres
+            # Multiplication par un facteur pour convertir approximativement en mètres
             distance = ((lat2 - lat1) ** 2 + (lon2 - lon1) ** 2) ** 0.5 * 111000
             total_distance += distance
             
@@ -121,14 +121,15 @@ class GPSTracker:
             'is_mock': self.mock_mode
         }
         
-        # Crée un dossier pour les courses si nécessaire
-        if not os.path.exists('runs'):
-            os.makedirs('runs')
+        if not os.path.exists('runs') : os.makedirs('runs')
             
-        # Sauvegarde les données dans un fichier JSON
+        # Sauvegarde les données localement dans un fichier JSON
+        # Moins lourd que une DB en local
         file_path = f"runs/{name}.json"
         with open(file_path, 'w') as f:
             json.dump(run_data, f, indent=2)
+
+        # TODO: Implémenter la sauvegarde network via une DB sur internet
             
         return file_path
 
@@ -256,7 +257,7 @@ class RunTrackerWidget(BoxLayout):
         # pour éviter une boucle infinie
     
     def update_ui(self, dt):
-        # Mise à jour des étiquettes d'interface
+        # Mise à jour de l'ui
         self.status_label.text = f'État: {self.run_status}'
         self.gps_label.text = self.gps_status
         
@@ -300,7 +301,7 @@ class RunTrackerWidget(BoxLayout):
         self.parent.parent.parent.transition.direction = 'left'
         self.parent.parent.parent.current = 'history'
 
-# Mise à jour de votre HomeScreenWidget pour y intégrer le système de tracking GPS
+# Main HomeScreenWidget
 class HomeScreenWidget(BoxLayout):
     def __init__(self, **kwargs):
         super(HomeScreenWidget, self).__init__(**kwargs)
@@ -313,7 +314,7 @@ class HomeScreenWidget(BoxLayout):
         # Vous pouvez ajouter d'autres widgets pour votre HomeScreen ici
         # ...
 
-# Votre HomeScreen existant, modifié pour intégrer le tracking GPS
+# Enfin le HomeScreen
 class HomeScreen(Screen):
     '''Screen for the main menu'''
     def __init__(self, **kwargs):
