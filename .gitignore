@@ -46,5 +46,7 @@ app/fonts/font.py
 
 # Ignoring CI automatisation, because of no use of .env there is a security issue to the ssh connection to the serveur,
 # I can change it or I can be lazy and nerver fix it, the second option was my choice.
-*.bat
-*.sh
+build.bat
+deploy_android.sh
+buildozer.bat
+buildozer.sh
